@@ -1,6 +1,8 @@
 
 import pandas as pd
 import numpy as np
+from sklearn.preprocessing import LabelEncoder
+
 
 
 # ------------
@@ -40,6 +42,8 @@ def preprocessing(df, state_to_region):
 
     # product category
     df['Product_category'] = df['product_category_name']
+    le  = LabelEncoder()
+    df['Product_category_encoded'] = le.fit_transform(df['Product_category']) 
 
     # product size
     df['Product_size'] = df['product_length_cm'] * df['product_height_cm'] * df['product_width_cm']
@@ -67,14 +71,14 @@ def preprocessing(df, state_to_region):
 
 
     # distance_km
-    #df['distance_km'] = df.apply(lambda row: haversine(row['geolocation_lat_x'], row['geolocation_lng_x'],
-                                                    #   row['geolocation_lat_y'], row['geolocation_lng_y']), axis=1)
+    df['distance_km'] = df.apply(lambda row: haversine(row['geolocation_lat_x'], row['geolocation_lng_x'],
+                                                      row['geolocation_lat_y'], row['geolocation_lng_y']), axis=1)
 
     df_final = df[['order_id', 'customer_id', 'order_status', 'order_purchase_timestamp', 'order_approved_at', 
                    'review_answer_timestamp', 'order_item_id', 'product_id', 'seller_id','payment_value', 
                    'review_id', 'review_score', 'month', 'rainfall', 'Product_weight_kg', 'Product_category', 
                    'Product_size',  'No_photos', 'Product_price',  'seasonality', 'is_delivery_late', 'geolocation_lat_x', 
-                   'geolocation_lng_x', 'geolocation_lat_y', 'geolocation_lng_y', 'freight_value']]
+                   'geolocation_lng_x', 'geolocation_lat_y', 'geolocation_lng_y', 'freight_value', 'distance_km', 'Product_category_encoded']]
     
     
     return df_final

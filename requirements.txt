@@ -9,7 +9,7 @@ cycler==0.12.1
 Cython==3.0.11
 debugpy==1.8.5
 decorator==5.1.1
-dowhy==0.11.1
+dowhy==0.8
 ecos==2.0.14
 exceptiongroup==1.2.2
 executing==2.0.1
