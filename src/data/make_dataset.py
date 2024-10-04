@@ -59,35 +59,6 @@ def load_data() -> dict:
 
 # ----------------------------------------------------- 2
 
-# def merge_all_datasets(olist_customers_df: pd.DataFrame, 
-#                        olist_geolocation_df: pd.DataFrame,
-#                        olist_order_items_df: pd.DataFrame,
-#                        olist_order_payments_df: pd.DataFrame,
-#                        olist_order_reviews_df: pd.DataFrame, 
-#                        olist_orders_df: pd.DataFrame,
-#                        olist_products_df: pd.DataFrame, 
-#                        olist_sellers_df: pd.DataFrame, 
-#                        olist_closed_deals_df: pd.DataFrame, 
-#                        olist_marketing_qualified_leads_df: pd.DataFrame) -> pd.DataFrame:
-#     '''
-#     Takes all the data as pandas dataframes, merges them into one final dataframe, and returns it
-
-#     Returns:
-#         pd.DataFrame
-    
-#     '''
-
-#     df = olist_orders_df.merge(olist_order_items_df, on='order_id', how='left')
-#     df = df.merge(olist_order_payments_df, on='order_id', how='outer', validate='m:m')
-#     df = df.merge(olist_order_reviews_df, on='order_id', how='outer')
-#     df = df.merge(olist_products_df, on='product_id', how='outer')
-#     df = df.merge(olist_customers_df, on='customer_id', how='outer')
-#     df = df.merge(olist_sellers_df, on='seller_id', how='outer')
-#     df = df.merge(olist_closed_deals_df, on='seller_id', how='left')
-#     df = df.merge(olist_marketing_qualified_leads_df, on='mql_id', how='left')
-#     return df
-
-
 def merge_all_datasets(olist_customers_df: pd.DataFrame, 
                        olist_geolocation_df: pd.DataFrame,
                        olist_order_items_df: pd.DataFrame,
@@ -96,8 +67,6 @@ def merge_all_datasets(olist_customers_df: pd.DataFrame,
                        olist_orders_df: pd.DataFrame,
                        olist_products_df: pd.DataFrame, 
                        olist_sellers_df: pd.DataFrame, 
-                       # olist_closed_deals_df: pd.DataFrame, 
-                       # olist_marketing_qualified_leads_df: pd.DataFrame
                        ) -> pd.DataFrame:
     '''
     Takes all the data as pandas dataframes, merges them into one final dataframe, and returns it
@@ -111,7 +80,6 @@ def merge_all_datasets(olist_customers_df: pd.DataFrame,
     'geolocation_lng': 'mean',
     'geolocation_city': 'first',
     'geolocation_state': 'first'}).reset_index()
-
     df = olist_orders_df.merge(olist_order_items_df, on='order_id', how='left')
     df = df.merge(olist_order_payments_df, on='order_id', how='outer', validate='m:m')
     df = df.merge(olist_order_reviews_df, on='order_id', how='outer')
@@ -119,9 +87,18 @@ def merge_all_datasets(olist_customers_df: pd.DataFrame,
     df = df.merge(olist_customers_df, on='customer_id', how='outer')
     df = df.merge(olist_sellers_df, on='seller_id', how='outer')
     df = df.merge(olist_geolocation_df_new, left_on='customer_zip_code_prefix', right_on='geolocation_zip_code_prefix',  how='left')
+    #customer defines as X
     df = df.merge(olist_geolocation_df_new, left_on='seller_zip_code_prefix', right_on='geolocation_zip_code_prefix',  how='left')
+    #seller defined as y
 
+    
+   # df = df.merge(olist_closed_deals_df, on='seller_id', how='left')
+   # df = df.merge(olist_marketing_qualified_leads_df, on='mql_id', how='left')
+    #merging the same for sellers now
+   
+    
     return df
+
 
 
 

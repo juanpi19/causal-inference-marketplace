@@ -2,6 +2,28 @@
 import pandas as pd
 import numpy as np
 
+
+# ------------
+# ------------------------------------------------------------- Define the Haversine function
+def haversine(lat1, lon1, lat2, lon2):
+    """
+    Calculate the great-circle distance between two points
+    on the Earth's surface given their latitude and longitude in decimal degrees.
+    """
+    # Convert latitude and longitude from degrees to radians
+    lat1, lon1, lat2, lon2 = map(np.radians, [lat1, lon1, lat2, lon2])
+
+    # Haversine formula
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+    a = np.sin(dlat / 2)**2 + np.cos(lat1) * np.cos(lat2) * np.sin(dlon / 2)**2
+    c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
+    r = 6371  # Radius of Earth in kilometers
+    distance = r * c
+
+    return distance
+
+
 def preprocessing(df, state_to_region):
 
     # Convert 'order_approved_at' column to datetime if it's not already
@@ -43,6 +65,11 @@ def preprocessing(df, state_to_region):
     df['order_purchase_timestamp'] = pd.to_datetime(df['order_purchase_timestamp'])
     df['seasonality'] = df['order_purchase_timestamp'].dt.month
 
+
+    # distance_km
+    #df['distance_km'] = df.apply(lambda row: haversine(row['geolocation_lat_x'], row['geolocation_lng_x'],
+                                                    #   row['geolocation_lat_y'], row['geolocation_lng_y']), axis=1)
+
     df_final = df[['order_id', 'customer_id', 'order_status', 'order_purchase_timestamp', 'order_approved_at', 
                    'review_answer_timestamp', 'order_item_id', 'product_id', 'seller_id','payment_value', 
                    'review_id', 'review_score', 'month', 'rainfall', 'Product_weight_kg', 'Product_category', 
@@ -51,27 +78,6 @@ def preprocessing(df, state_to_region):
     
     
     return df_final
-
-
-# ------------
-# ------------------------------------------------------------- Define the Haversine function
-def haversine(lat1, lon1, lat2, lon2):
-    """
-    Calculate the great-circle distance between two points
-    on the Earth's surface given their latitude and longitude in decimal degrees.
-    """
-    # Convert latitude and longitude from degrees to radians
-    lat1, lon1, lat2, lon2 = map(np.radians, [lat1, lon1, lat2, lon2])
-
-    # Haversine formula
-    dlat = lat2 - lat1
-    dlon = lon2 - lon1
-    a = np.sin(dlat / 2)**2 + np.cos(lat1) * np.cos(lat2) * np.sin(dlon / 2)**2
-    c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
-    r = 6371  # Radius of Earth in kilometers
-    distance = r * c
-
-    return distance
 
 
 # ------------------ dealing missing values
