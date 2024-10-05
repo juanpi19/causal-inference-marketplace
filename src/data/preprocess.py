@@ -78,7 +78,8 @@ def preprocessing(df, state_to_region):
                    'review_answer_timestamp', 'order_item_id', 'product_id', 'seller_id','payment_value', 
                    'review_id', 'review_score', 'month', 'rainfall', 'Product_weight_kg', 'Product_category', 
                    'Product_size',  'No_photos', 'Product_price',  'seasonality', 'is_delivery_late', 'geolocation_lat_x', 
-                   'geolocation_lng_x', 'geolocation_lat_y', 'geolocation_lng_y', 'freight_value', 'distance_km', 'Product_category_encoded']]
+                   'geolocation_lng_x', 'geolocation_lat_y', 'geolocation_lng_y', 'freight_value', 'distance_km', 
+                   'Product_category_encoded', 'late_delivery_in_days']]
     
     
     return df_final
