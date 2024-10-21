@@ -74,7 +74,7 @@ def preprocessing(df, state_to_region):
     df['distance_km'] = df.apply(lambda row: haversine(row['geolocation_lat_x'], row['geolocation_lng_x'],
                                                       row['geolocation_lat_y'], row['geolocation_lng_y']), axis=1)
 
-    df_final = df[['order_id', 'customer_id', 'order_status', 'order_purchase_timestamp', 'order_approved_at', 
+    df_final = df[['order_id', 'customer_id', 'customer_unique_id', 'order_status', 'order_purchase_timestamp', 'order_approved_at', 
                    'review_answer_timestamp', 'order_item_id', 'product_id', 'seller_id','payment_value', 
                    'review_id', 'review_score', 'month', 'rainfall', 'Product_weight_kg', 'Product_category', 
                    'Product_size',  'No_photos', 'Product_price',  'seasonality', 'is_delivery_late', 'geolocation_lat_x', 
