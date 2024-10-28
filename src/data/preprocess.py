@@ -45,7 +45,7 @@ def handle_missing_values(df):
 
     avg_purchase_to_approval = (df['order_approved_at'] - df['order_purchase_timestamp']).mean()
     avg_approval_to_carrier = (df['order_delivered_carrier_date'] - df['order_approved_at']).mean()
-    avg_carrier_to_customer = (df['order_delivered_customer_date'] - df['order_delivered_carrier_date']).mean()
+    #avg_carrier_to_customer = (df['order_delivered_customer_date'] - df['order_delivered_carrier_date']).mean()
 
     # Impute missing dates based on calculated averages
     df['order_approved_at'] = df.apply(
@@ -58,16 +58,16 @@ def handle_missing_values(df):
         if pd.isna(row['order_delivered_carrier_date']) else row['order_delivered_carrier_date'],
         axis=1
     )
-    df['order_delivered_customer_date'] = df.apply(
-        lambda row: row['order_delivered_carrier_date'] + avg_carrier_to_customer 
-        if pd.isna(row['order_delivered_customer_date']) else row['order_delivered_customer_date'],
-        axis=1
-    )
-    df['order_delivered_customer_date'] = df.apply(
-        lambda row: min(row['order_delivered_customer_date'], row['order_estimated_delivery_date']) 
-        if not pd.isna(row['order_delivered_customer_date']) else row['order_delivered_customer_date'],
-        axis=1
-    )
+    # df['order_delivered_customer_date'] = df.apply(
+    #     lambda row: row['order_delivered_carrier_date'] + avg_carrier_to_customer 
+    #     if pd.isna(row['order_delivered_customer_date']) else row['order_delivered_customer_date'],
+    #     axis=1
+    # )
+    # df['order_delivered_customer_date'] = df.apply(
+    #     lambda row: min(row['order_delivered_customer_date'], row['order_estimated_delivery_date']) 
+    #     if not pd.isna(row['order_delivered_customer_date']) else row['order_delivered_customer_date'],
+    #     axis=1
+    # )
 
     # Replace review-related columns' NaNs with 'no review' or 1000000000 for review_score
     review_columns = [
@@ -190,7 +190,9 @@ def preprocessing(df, state_to_region):
     df['order_estimated_delivery_date'] = pd.to_datetime(df['order_estimated_delivery_date'])
     df['order_purchase_timestamp'] = pd.to_datetime(df['order_purchase_timestamp'])
     df['late_delivery_in_days'] = (df['order_delivered_customer_date'] - df['order_estimated_delivery_date']).dt.days
-    df['is_delivery_late'] = np.where(df['late_delivery_in_days'] > 0, 1, 0)
+
+    df['is_delivery_late'] = np.where(df['late_delivery_in_days'].isna(), np.nan, 
+                                      np.where(df['late_delivery_in_days'] > 0, 1, 0))
 
     df['Rating']= df['review_score']
 
