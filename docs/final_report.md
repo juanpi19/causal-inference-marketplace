@@ -42,13 +42,25 @@ This is where our analysis comes into play. A match has been made, and the produ
 
 Before formalizing our research questions, it’s important to define what constitutes a late delivery. Each order includes an *expected delivery date* and an *actual delivery date*. A delivery is classified as late if the actual delivery date occurs after the expected delivery date. For our analysis, we treat late delivery as a binary variable: it takes a value of 1 if the delivery is late, regardless of whether it is delayed by 1 day or 10 days; otherwise, it is set to 0.
 
-
 ```plaintext
-# Define late delivery logic
+# Pseudocode for how the treatment (T) is defined
 if actual_delivery > expected_delivery
     is_late_delivery = 1
 else
     is_late_delivery = 0
+```
+
+Another key variable is customer ratings, which serves as our outcome variable. This variable measures customer satisfaction following a purchase. It is ordinal, ranging from 1 to 5, where 5 represents an excellent experience and 1 signifies a poor experience.
+
+With this being clear, we now define our research question:
+
+**What is the impact of a late delivery on customer satisfaction?**
+
+Our primary goal is to uncover the causal effect of late delivery on customer satisfaction. While we could explore associations using methods like regression, this project focuses on leveraging causal inference techniques to estimate the causal relationship more accurately.
+
+```plaintext
+# Causal Link
+is_late_delivery -> customer_rating
 ```
 
 
