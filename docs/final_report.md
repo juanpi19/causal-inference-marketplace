@@ -23,7 +23,7 @@ That friction is reduced by data science, who would tackle three important aspec
 - Learning about the matching
 
 
-#### Finding the People to Match with
+### Finding the People to Match with
 
 Depending on the nature of the marketplace—particularly in the case of a two-sided marketplace—we must connect two groups: suppliers, who are willing to sell products or offer services, and customers, who are looking to purchase those products or services.
 
