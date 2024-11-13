@@ -40,9 +40,18 @@ This is where our analysis comes into play. A match has been made, and the produ
 
 ### 1.2 Research Questions
 
-Before we formalize out research questions, we need to be clear about how we define a late delivery, this is important when analyzing the results
+Before formalizing our research questions, it’s important to define what constitutes a late delivery. Each order includes an *expected delivery date* and an *actual delivery date*. A delivery is classified as late if the actual delivery date occurs after the expected delivery date. For our analysis, we treat late delivery as a binary variable: it takes a value of 1 if the delivery is late, regardless of whether it is delayed by 1 day or 10 days; otherwise, it is set to 0.
 
-- Primary research question
+
+```plaintext
+# Define late delivery logic
+if actual_delivery > expected_delivery
+    is_late_delivery = 1
+else
+    is_late_delivery = 0
+end if
+
+
 - Definition of key terms (delayed delivery, customer satisfaction)
 - Scope and limitations
 
