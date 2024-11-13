@@ -23,15 +23,15 @@ That friction is reduced by data science, who would tackle three important aspec
 - Learning about the matching
 
 
-**Finding the people to match with**
+#### Finding the people to match with
 
 Depending on the nature of the marketplace—particularly in the case of a two-sided marketplace—we must connect two groups: suppliers, who are willing to sell products or offer services, and customers, who are looking to purchase those products or services.
 
-**Making the matching**
+#### Making the matching
 
 If I’m a customer, my question is: Who should I hire? If I’m a supplier, my question is: Who do I want as a customer?
 
-**Learning about matching**
+#### Learning about matching
 
 Suppliers will continue to sell products or offer services in the marketplace only if they have a positive experience—and the same holds true for customers. So, how can we learn from these interactions to ensure both sides are satisfied?
 
