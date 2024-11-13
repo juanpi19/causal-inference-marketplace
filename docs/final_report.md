@@ -49,7 +49,7 @@ if actual_delivery > expected_delivery
     is_late_delivery = 1
 else
     is_late_delivery = 0
-end if
+```
 
 
 - Definition of key terms (delayed delivery, customer satisfaction)
