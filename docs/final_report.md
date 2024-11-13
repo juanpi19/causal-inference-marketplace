@@ -11,6 +11,18 @@ This study leverages the rich dataset from Olist, Brazil's largest department st
 ### 1.1 What is a Marketplace? Why the Need of Data Science?
 
 
+
+The role of a marketplace is to effectively connect customers with suppliers, whether they offer products or services. An important aspect of being a marketplace is that it neither owns inventory nor provides services directly. Instead, its primary goal is to facilitate connections between those who do and the customers who need them. However, this is far more complex than it might seem. Key questions arise, such as: How can we match customers and suppliers effectively? And once a match is made, how do we ensure a positive experience for both sides of the marketplace? This is where data comes in and plays a crucial role in streamlining this process.
+
+According to <a href="https://www.youtube.com/watch?v=BVzTfsUMaK8&t=492s" target="_blank">Ramesh Johari</a> , the fundamental idea of any marketplace is taking the friction of the transaction cost away. 
+
+That friction is reduced by data science, who would tackle three important aspects in any marketplace (any vertical): 
+
+- Finding the people to match with
+- Making the matching
+- Learning about the matching
+
+
 ### 1.2 Research Questions
 
 Before we formalize out research questions, we need to be clear about how we define a late delivery, this is important when analyzing the results
