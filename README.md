@@ -60,9 +60,10 @@ Achieved comparable covariate distributions between groups
 -1.8 stars. On Average a late delivery causes customer ratings to drop by 1.8 stars.
 
 **Notebook**: 
+
 📊 [Propensity Score Matching](notebooks/model-development.ipynb)
 
-### 1. Graphical Causal Modeling
+### 2. Graphical Causal Modeling
 
 We first modeled the data generating process using:
 
