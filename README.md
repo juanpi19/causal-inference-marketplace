@@ -24,11 +24,11 @@ Based on the DAG insights, we implemented matching to estimate the causal effect
 - **Approach**: Paired late deliveries with similar on-time deliveries, effectively estimating the *average treatment effect on the treated*
 
 - **Matching Variables**:
- - Distance (km)
- - Season
- - Product category
- - Freight value
- - Product size
+   - Distance (km)
+   - Season
+   - Product category
+   - Freight value
+   - Product size
 
 - **Balance**: Achieved comparable covariate distributions between groups
 
@@ -45,11 +45,11 @@ We first modeled the data generating process using:
 - **Directed Acyclic Graph (DAG)**: Visualized the causal relationships between variables
 
 - **Key Variables**:
- - Distance (km)
- - Season
- - Product category
- - Freight value
- - Product size
+   - Distance (km)
+   - Season
+   - Product category
+   - Freight value
+   - Product size
 
 - **Notebook**: 📊 [Graphical Causal Model](notebooks/gcm-development.ipynb)
 
