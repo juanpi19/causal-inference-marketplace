@@ -19,9 +19,28 @@ Our analysis employed two complementary causal inference approaches:
 ![Causal DAG](results/figures/pictures/dag.jpg)
 
 ### 1. Propensity Score Matching
-Based on the DAG insights, we implemented matching to estimate the causal effect:
 
-- **Approach**: Paired late deliveries with similar on-time deliveries, effectively estimating the *average treatment effect on the treated*
+Based on the DAG insights, we use propensity score matching to eliminate any variation that may come from our matching variables that may bias our causal effect. Once the variation has been removed and our matching variables are balanced, we are able to effectively estimate the causal effect of late deliveries on customer ratings.
+
+We could define propensity score as the conditional probability of the observation being treated given the matching variables
+```
+Propensity Score = P(T=1| Matching Variables)
+```
+
+- **Approach**: We match observations from the treatment group, where deliveries were late, with those from the control group, where deliveries were on time. By effectively estimating the *Average Treatment Effect on the Treated (ATT)*, we can infer what customer ratings would have been had the deliveries not been late for the treatment group.
+
+- **Causal Estimand Identification**
+
+Based on the DAG, the causal effect is identified through the following estimand:
+
+```latex
+P(Rating|is_delivery_late,distance_km,season,Product_category_encoded,freight_value,Product_size)
+```
+
+realized estimand
+```
+Rating~is_delivery_late+distance_km+season+Product_category_encoded+freight_value+Product_size
+```
 
 - **Matching Variables**:
    - Distance (km)
@@ -32,9 +51,7 @@ Based on the DAG insights, we implemented matching to estimate the causal effect
 
 - **Balance**: Achieved comparable covariate distributions between groups
 
-- **Estimand**: Average Treatment Effect on the Treated (ATT)
-
-- **Results**: -1.8 stars. On Average a late delivery causes customer ratings to drop by 1.8 stars.
+- **Results (ATT)**: -1.8 stars. On Average a late delivery causes customer ratings to drop by 1.8 stars.
 
 - **Notebook**: 📊 [Propensity Score Matching](notebooks/model-development.ipynb)
 
@@ -53,50 +70,6 @@ We first modeled the data generating process using:
 
 - **Notebook**: 📊 [Graphical Causal Model](notebooks/gcm-development.ipynb)
 
-
-
-
-
-### Causal Identification Strategy
-
-Our formal estimand is:
-```latex
-E[Rating|do(is_delivery_late)] = ∫ E[Rating|is_delivery_late, X] P(X) dX
-
-
-## Directed Acyclic Graph
-
-![Causal DAG](results/figures/pictures/dag.jpg)
-
-
-## Causal Estimand Identification
-
-### Estimand Specification
-- **Method**: Backdoor Adjustment
-- **Treatment Variable**: `is_delivery_late`
-- **Outcome Variable**: `Rating`
-
-### Mathematical Expression
-The causal effect is identified through the following estimand:
-
-```latex
-P(Rating|is_delivery_late,distance_km,season,Product_category_encoded,freight_value,Product_size)
-```
-
-realized estimand
-```
-Rating~is_delivery_late+distance_km+season+Product_category_encoded+freight_value+Product_size
-```
-
-
-## Expected Outcomes
-
-This project aims to provide valuable insights into:
-- The quantitative impact of delivery delays on customer satisfaction
-- Key factors contributing to delivery delays in e-commerce
-- Potential strategies for improving customer satisfaction in online retail
-
-By leveraging causal inference techniques, we hope to move beyond mere correlation and uncover actionable insights for e-commerce businesses.
 
 ## Tools and Technologies
 
