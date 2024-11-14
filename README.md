@@ -14,7 +14,7 @@ Our two research questions are:
 
 ## Methodology
 
-Our analysis employed two complementary causal inference approaches:
+Our analysis employed two complementary causal inference approaches: *Propensity Score Matching* and *Graphical Causal Models*
 
 ![Causal DAG](results/figures/pictures/dag.jpg)
 
@@ -69,7 +69,8 @@ In Graphical Causal Models the goal is to model the data generating process base
 
 Here is an example
 
-![Structural Causal Model](results/figures/pictures/scm.png)
+<img src="results/figures/pictures/scm.png" alt="Structural Causal Model" width="300"/>
+
 
 the causal mechanisms are defined by functional causal models (FCMs) for non-root nodes and stochastic models for root nodes.
 
