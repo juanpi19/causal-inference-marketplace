@@ -14,13 +14,54 @@ Our two research questions are:
 
 ## Methodology
 
-1. **Model Formulation**: Develop a causal inference model based on how we think the world works. We model it using a DAG.
+Our analysis employed two complementary causal inference approaches:
 
-2. **Causal Estimand Identification**: Determine an expression for the causal effect under our model assumptions.
+![Causal DAG](results/figures/pictures/dag.jpg)
 
-3. **Statistical Estimation**: Apply advanced statistical methods such as matching or instrumental variables to estimate the causal effect.
+### 1. Propensity Score Matching
+Based on the DAG insights, we implemented matching to estimate the causal effect:
 
-4. **Robustness Checks**: Verify the validity of our estimates through various robustness checks.
+- **Approach**: Paired late deliveries with similar on-time deliveries, effectively estimating the *average treatment effect on the treated*
+
+- **Matching Variables**:
+ - Distance (km)
+ - Season
+ - Product category
+ - Freight value
+ - Product size
+
+- **Balance**: Achieved comparable covariate distributions between groups
+
+- **Estimand**: Average Treatment Effect on the Treated (ATT)
+
+- **Results**: -1.8 stars. On Average a late delivery causes customer ratings to drop by 1.8 stars.
+
+- **Notebook**: 📊 [Propensity Score Matching](notebooks/model-development.ipynb)
+
+### 1. Graphical Causal Modeling
+
+We first modeled the data generating process using:
+
+- **Directed Acyclic Graph (DAG)**: Visualized the causal relationships between variables
+
+- **Key Variables**:
+ - Distance (km)
+ - Season
+ - Product category
+ - Freight value
+ - Product size
+
+- **Notebook**: 📊 [Graphical Causal Model](notebooks/gcm-development.ipynb)
+
+
+
+
+
+### Causal Identification Strategy
+
+Our formal estimand is:
+```latex
+E[Rating|do(is_delivery_late)] = ∫ E[Rating|is_delivery_late, X] P(X) dX
 
 
 ## Directed Acyclic Graph
@@ -42,7 +83,7 @@ The causal effect is identified through the following estimand:
 P(Rating|is_delivery_late,distance_km,season,Product_category_encoded,freight_value,Product_size)
 ```
 
-realizez estimand
+realized estimand
 ```
 Rating~is_delivery_late+distance_km+season+Product_category_encoded+freight_value+Product_size
 ```
