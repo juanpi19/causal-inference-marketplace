@@ -7,6 +7,7 @@ This project investigates the causal effect of delayed delivery on customer sati
 
 ## Research Question
 Our primary research question is:
+
 **What is the causal effect of delayed delivery on customer ratings?**
 
 
