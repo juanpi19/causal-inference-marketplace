@@ -69,7 +69,7 @@ In Graphical Causal Models the goal is to model the data generating process base
 
 Here is an example
 
-<img src="results/figures/pictures/scm.png" alt="Structural Causal Model" width="300"/>
+<img src="results/figures/pictures/scm.png" alt="Structural Causal Model" width="600"/>
 
 
 the causal mechanisms are defined by functional causal models (FCMs) for non-root nodes and stochastic models for root nodes.
