@@ -39,7 +39,12 @@ Our two research questions are:
 The causal effect is identified through the following estimand:
 
 ```latex
-E[Rating|do(is_delivery_late)] = ∫ E[Rating|is_delivery_late, X] P(X) dX
+P(Rating|is_delivery_late,distance_km,season,Product_category_encoded,freight_value,Product_size)
+```
+
+realizez estimand
+```
+Rating~is_delivery_late+distance_km+season+Product_category_encoded+freight_value+Product_size
 ```
 
 
