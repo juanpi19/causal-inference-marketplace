@@ -76,8 +76,15 @@ the causal mechanisms are defined by functional causal models (FCMs) for non-roo
 A causal mechanism describes how the values of a node are influenced by the values of its parent nodes.
 
 
+- **Notebook**:
 
-- **Notebook**: 📊 [Graphical Causal Model](notebooks/gcm-development.ipynb)
+ 📊 [Graphical Causal Model](notebooks/gcm-development.ipynb)
+
+
+We created a more in detailed report about the analysis that can be found here:
+
+[Final Report](docs/final_report.md)
+
 
 
 ## Tools and Technologies
@@ -146,8 +153,6 @@ When you're done working on the project, you can deactivate the virtual environm
 ```
 deactivate
 ```
-
-## Contributors
 
 ## Contributors
 
