@@ -6,9 +6,21 @@ This project investigates the causal effect of delayed delivery on customer sati
 
 
 ## Research Question
-Our primary research question is:
+Our two research questions are:
 
-**What is the causal effect of delayed delivery on customer ratings?**
+1. **What is the causal effect of delayed delivery on customer ratings?**
+
+2. **What is the causal effect of delayed delivery on revenue?**
+
+## Methodology
+
+1. **Model Formulation**: Develop a causal inference model based on how we think the world works. We model it using a DAG.
+
+2. **Causal Estimand Identification**: Determine an expression for the causal effect under our model assumptions.
+
+3. **Statistical Estimation**: Apply advanced statistical methods such as matching or instrumental variables to estimate the causal effect.
+
+4. **Robustness Checks**: Verify the validity of our estimates through various robustness checks.
 
 
 ## Directed Acyclic Graph
@@ -16,14 +28,20 @@ Our primary research question is:
 ![Causal DAG](results/figures/pictures/dag.jpg)
 
 
-## Methodology
+## Causal Estimand Identification
 
-Our analysis will follow these key steps:
+### Estimand Specification
+- **Method**: Backdoor Adjustment
+- **Treatment Variable**: `is_delivery_late`
+- **Outcome Variable**: `Rating`
 
-1. **Model Formulation**: Develop a causal inference model based on carefully considered assumptions.
-2. **Causal Estimand Identification**: Determine an expression for the causal effect under our model assumptions.
-3. **Statistical Estimation**: Apply advanced statistical methods such as matching or instrumental variables to estimate the causal effect.
-4. **Robustness Checks**: Verify the validity of our estimates through various robustness checks.
+### Mathematical Expression
+The causal effect is identified through the following estimand:
+
+```latex
+E[Rating|do(is_delivery_late)] = ∫ E[Rating|is_delivery_late, X] P(X) dX
+```
+
 
 ## Expected Outcomes
 
