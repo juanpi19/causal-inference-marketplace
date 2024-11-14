@@ -27,9 +27,11 @@ We could define propensity score as the conditional probability of the observati
 Propensity Score = P(T=1| Matching Variables)
 ```
 
-- **Approach**: We match observations from the treatment group, where deliveries were late, with those from the control group, where deliveries were on time. By effectively estimating the *Average Treatment Effect on the Treated (ATT)*, we can infer what customer ratings would have been had the deliveries not been late for the treatment group.
+**Approach**: 
 
-- **Causal Estimand Identification**
+The first step is to identify our matching variables—this is the identification step. Once these variables are determined, we match observations from the treatment group, where deliveries were late, to those in the control group, where deliveries were on time. By accurately estimating the *Average Treatment Effect on the Treated (ATT)*, we can infer what customer ratings would have been if the deliveries had not been late for the treatment group.
+
+**Causal Estimand Identification**
 
 Based on the DAG, the causal effect is identified through the following estimand:
 
@@ -42,18 +44,23 @@ realized estimand
 Rating~is_delivery_late+distance_km+season+Product_category_encoded+freight_value+Product_size
 ```
 
-- **Matching Variables**:
-   - Distance (km)
-   - Season
-   - Product category
-   - Freight value
-   - Product size
+**Matching Variables**:
+- Distance (km)
+- Season
+- Product category
+- Freight value
+- Product size
 
-- **Balance**: Achieved comparable covariate distributions between groups
+**Balance**: 
 
-- **Results (ATT)**: -1.8 stars. On Average a late delivery causes customer ratings to drop by 1.8 stars.
+Achieved comparable covariate distributions between groups
 
-- **Notebook**: 📊 [Propensity Score Matching](notebooks/model-development.ipynb)
+**Results (ATT)**: 
+
+-1.8 stars. On Average a late delivery causes customer ratings to drop by 1.8 stars.
+
+**Notebook**: 
+📊 [Propensity Score Matching](notebooks/model-development.ipynb)
 
 ### 1. Graphical Causal Modeling
 
