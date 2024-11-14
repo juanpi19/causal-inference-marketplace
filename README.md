@@ -1,20 +1,19 @@
 # Olist E-commerce Causal Analysis
 
 ## Project Overview
+This project investigates the causal effect of delayed delivery on customer satisfaction ratings in e-commerce, using data provided by Olist, the largest department store in Brazilian marketplaces.
 
-This project aims to investigate the causal effect of delayed delivery on customer satisfaction ratings in e-commerce, using data provided by Olist, the largest department store in Brazilian marketplaces.
 
-### About Olist and the Dataset
 
-Olist connects small businesses from all over Brazil to various channels through a single contract. Merchants can sell their products via the Olist Store and ship them directly to customers using Olist's logistics partners. The dataset captures the customer journey from purchase to delivery and feedback.
-
-### Research Question
-
+## Research Question
 Our primary research question is:
+**What is the causal effect of delayed delivery on customer ratings?**
 
-**What is the causal effect of delayed delivery on customer satisfaction ratings in e-commerce?**
 
-Following this, we will conduct a root-cause analysis to understand the factors contributing to delivery delays.
+## Directed Acyclic Graph
+
+![Causal DAG](results/figures/pictures/dag.jpg)
+
 
 ## Methodology
 
