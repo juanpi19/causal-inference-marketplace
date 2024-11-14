@@ -65,7 +65,11 @@ Achieved comparable covariate distributions between groups
 
 ### 2. Graphical Causal Modeling
 
-We first modeled the data generating process using:
+In Graphical Causal Models the goal is to model the data generating process based on what's observed from the DAG we designed. We achieve this by assigning a causal mechanism to each node in the graph.
+
+Here is an example
+
+![Structural Causal Model](results/figures/pictures/scm.png)
 
 - **Directed Acyclic Graph (DAG)**: Visualized the causal relationships between variables
 
