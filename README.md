@@ -71,14 +71,11 @@ Here is an example
 
 ![Structural Causal Model](results/figures/pictures/scm.png)
 
-- **Directed Acyclic Graph (DAG)**: Visualized the causal relationships between variables
+the causal mechanisms are defined by functional causal models (FCMs) for non-root nodes and stochastic models for root nodes.
 
-- **Key Variables**:
-   - Distance (km)
-   - Season
-   - Product category
-   - Freight value
-   - Product size
+A causal mechanism describes how the values of a node are influenced by the values of its parent nodes.
+
+
 
 - **Notebook**: 📊 [Graphical Causal Model](notebooks/gcm-development.ipynb)
 
