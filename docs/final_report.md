@@ -173,13 +173,31 @@ The final dataset included key columns: order_id, customer_id, seller_id, timest
 
 
 ### 3.2 Propensity Score Matching (Late Delivery --> Revenue)
-- Matching methodology
-- Logic behind lags
-- Covariate selection
-- Balance diagnostics
-- Results
-- Robustness Checks
-- Interpretation of Results
+Matching Methodology
+Propensity Score Matching (PSM) is a widely used method for estimating causal effects by balancing the distribution of covariates between treated and control groups. For our analysis, the treatment was defined as experiencing a late delivery (lagged by one day), and the outcome was the payment value. PSM allowed us to match customers who experienced late deliveries with those who did not, ensuring comparable covariate distributions. The selected covariates included product category, season, product size, freight value, and distance, chosen for their potential influence on the payment value.
+
+Logic Behind Lags
+Lags are critical in temporal data analysis to account for delayed effects. A late delivery may not immediately influence a customer's payment value but could affect future transactions by eroding trust and satisfaction. By introducing lagged variables for delivery status and ratings, we aimed to capture these delayed impacts. The optimal lag length was determined using cross-validation, where we tested lags ranging from 1 to 7 days and calculated Mean Squared Error (MSE) for each lag. A lag of one day yielded the lowest MSE and was used in the analysis.
+
+Covariate Selection
+The covariates were selected based on domain knowledge and their relevance to customer behavior and payment values. Product category and size captured variations in item types, while season accounted for potential temporal effects (e.g., holiday sales). Freight value and distance addressed logistical costs and complexity, which might correlate with late deliveries and influence payment values.
+
+Balance Diagnostics
+To ensure the robustness of the matching, balance diagnostics were performed on the covariates before and after matching. Metrics such as standardized mean differences and propensity score overlap were examined. The results showed improved balance post-matching, indicating the effectiveness of PSM in creating comparable groups.
+
+Results
+The Average Treatment Effect (ATE) of late deliveries on payment value was estimated at -46.50, with a confidence interval of [-68.87, -38.54]. This negative effect suggests that late deliveries significantly reduce payment values. However, the Average Treatment Effect on the Treated (ATT) was much smaller at -8.93, indicating a reduced impact for customers who had already experienced late deliveries. The Average Treatment Effect on the Controls (ATC) was -48.59, highlighting the potential loss if on-time customers experienced late deliveries.
+
+Robustness Checks
+Robustness checks included sensitivity analysis with unobserved confounders. When adding a hypothetical unobserved common cause, the estimated ATE shifted slightly, but the negative effect remained significant. These results support the validity of the causal estimate, although they highlight the potential influence of unobserved factors.
+
+Interpretation of Results
+While the results indicated a negative effect of late deliveries on payment values, we decided not to rely on them for several reasons:
+-   There is limited causal interpretation. The assumption of no unmeasured confounding may not hold, as customer satisfaction or loyalty—unobserved in our dataset—could mediate the effect.
+-   The estimated magnitude of the effect seemed implausibly high given the overall payment values in the dataset, which in turn suggests potential issues with model specification or data quality.
+-   The changes in covariate selection produced noticeably different results which makes us question the robustness of the findings.
+-   The reliance on a single optimal lag might oversimplify the complex temporal dynamics of customer behavior.
+In conclusion, while PSM provided valuable insights the methodology was ultimately deemed unsuitable for this specific research question. Further refinement of the causal framework or exploration of alternative methods (e.g., instrumental variables) may yield more reliable results.
 
 
 ### 3.3 Practical Implications
