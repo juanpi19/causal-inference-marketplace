@@ -156,12 +156,38 @@ The final dataset included key columns: order_id, customer_id, seller_id, timest
 - Identification strategy
 
 ### 3.2 Propensity Score Matching (Late Delivery --> Ratings)
-- Matching methodology
-- Covariate selection
-- Balance diagnostics
-- Results
-- Robustness Checks
-- Interpretation of Results
+
+### 3.2.1 Matching Methodology
+The matching methodology employed in this project is grounded in the Potential Outcomes Framework, a key concept in causal inference. This framework defines causal effects by comparing the outcomes of treated and control groups as if they were both exposed and unexposed to the treatment. However, the Fundamental Problem of Causal Inference is that we can never observe both outcomes for the same unit simultaneously. This in this case is addressed by creating comparable groups through Propensity Score Matching (PSM), to approximate a randomized experimental design.
+PSM is a widely used technique to address the problem of confounding by balancing covariates between treated and control groups. The method works in three main steps:
+
+Propensity Score Calculation: A logistic regression model was used to estimate the propensity score, which is the probability of receiving the treatment (e.g., late deliveries) given the observed covariates. These scores summarize the multidimensional covariate space into a single scalar value, simplifying the matching process.
+
+Matching: Using a 1-to-1 nearest neighbor matching algorithm, treated units were matched with control units that had similar propensity scores. Matching ensures that the treated and control groups are comparable in terms of the covariates, minimizing selection bias. Importantly, matching was performed without replacement to maintain the integrity of the control group.
+
+Average Treatment Effect (ATE) Calculation: After matching, the treatment effect was estimated by comparing the average outcomes (e.g., ratings or revenue metrics) between the treated and control groups. The ATE represents the causal impact of the treatment on the outcome, assuming that unobserved confounding is minimal.
+
+By leveraging PSM, we effectively created balanced treatment and control groups that allowed for more robust causal inference. This approach ensures that differences in outcomes can be more reliably attributed to the treatment rather than to pre-existing differences between the groups.
+
+### 3.2.2 Covariate selection
+The selection of covariates for propensity score matching was guided by their potential influence on both the treatment (late deliveries) and the outcome variables (ratings). Key covariates included product-specific characteristics (product category, product size), transaction attributes ( freight value, distance), and temporal factors (month). These covariates were chosen based on domain knowledge to capture relevant factors that could simultaneously affect the likelihood of late delivery and its subsequent impact on customer ratings. By including these covariates in the propensity score model, the matching process ensured balance across these factors, thereby minimizing confounding and improving the validity of the causal estimates.
+
+### 3.3.3 Balance diagnostics
+To evaluate the success of propensity score matching, we visually compared the distributions of propensity scores for the treated and control groups before and after matching. Before matching, the propensity score distributions showed divergence, indicating an imbalance in the covariates between the two groups.
+
+ After matching, the distributions aligned closely, demonstrating that the matching process successfully balanced the covariates. 
+This overlap ensures that treated and control units are comparable, reducing confounding and allowing for a more reliable estimation of the treatment effect.
+
+### 3.3.4 Results
+The results of the analysis indicate a negative impact of delayed deliveries on ratings. The ATE (Average Treatment Effect) of -1.91 suggests that, on average, late deliveries lead to a reduction of approximately 1.91 units in the outcome ratings. The ATT (Average Treatment Effect on the Treated) of -1.98 implies that for those orders that were actually delivered late, the impact is slightly stronger, with an average reduction of 1.98 units in ratings. Similarly, the ATC (Average Treatment Effect on the Controls) of -1.90 indicates that if orders that were not delayed had been delayed, the expected reduction in ratings would have been approximately 1.90 units. The close alignment between ATE, ATT, and ATC values indicates consistency in the treatment effect across the population, suggesting that the negative impact of late deliveries is broadly uniform. This highlights the importance of addressing delays to mitigate their negative effects on key performance metrics.
+
+### 3.5.5 Robustness Checks
+To ensure the robustness of the estimated treatment effect, we conducted two key robustness checks. First, we used a bootstrap confidence interval to validate the stability of the Average Treatment Effect (ATE) estimated through Propensity Score Matching (PSM). The ATE was calculated as -1.91, with a narrow 95% confidence interval ranging from -1.97 to -1.86 and a standard error of 0.0339. These results suggest high precision in the estimated treatment effect and provide evidence that the negative impact of delayed deliveries is statistically significant.
+Second, we performed a sensitivity analysis by introducing an unobserved confounder to test how the treatment effect changes in its presence. After adding the hypothetical confounder, the estimated treatment effect remained consistent, with the new effect ranging from -1.94 to -1.85. This minimal deviation demonstrates that the causal estimate is robust to potential unmeasured confounding and further validates the reliability of the analysis. Together, these checks reinforce confidence in the validity and robustness of the findings.
+
+### 3.6.6 Interpretation of Results
+The results of the analysis reveal a consistent and significant negative impact of delayed deliveries on key metrics. The ATE of -1.91 suggests that late deliveries lead to a notable reduction in ratings, while the ATT (-1.98) and ATC (-1.90) indicate that this effect is uniformly felt across both treated and control groups. Robustness checks, including bootstrap confidence intervals and sensitivity analysis, confirm the reliability of these estimates, with minimal deviation even after accounting for potential unobserved confounders. These findings highlight the importance of timely deliveries in maintaining customer satisfaction and suggest that addressing delays could yield measurable benefits in outcomes.
+However, the analysis has some limitations. While Propensity Score Matching successfully balanced observed covariates, the potential for unobserved confounders, though tested for robustness, cannot be entirely ruled out. Additionally, the treatment effect measured here captures the short-term impact on ratings or payment value but may not fully account for long-term effects or indirect pathways, such as the influence of ratings on future revenues. Finally, the results are conditional on the quality and completeness of the data, particularly regarding the accuracy of the treatment and outcome variables. Despite these limitations, the analysis provides actionable insights for mitigating the adverse effects of delivery delays.git 
 
 ### 3.3 Graphical Causal Models
 - DAG specification
@@ -172,7 +198,7 @@ The final dataset included key columns: order_id, customer_id, seller_id, timest
 - Interpretation of Results
 
 
-### 3.2 Propensity Score Matching (Late Delivery --> Revenue)
+### 3.4 Propensity Score Matching (Late Delivery --> Revenue)
 - Matching methodology
 - Logic behind lags
 - Covariate selection
@@ -182,7 +208,7 @@ The final dataset included key columns: order_id, customer_id, seller_id, timest
 - Interpretation of Results
 
 
-### 3.3 Practical Implications
+### 3.5 Practical Implications
 - Recommendations for e-commerce operations
 - Potential interventions
 - Cost-benefit considerations
